@@ -17,7 +17,13 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addStudents(@RequestBody Student student) {
+    public void addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteStudent(@PathVariable int id){
+        studentService.deleteStudent(id);
     }
 }

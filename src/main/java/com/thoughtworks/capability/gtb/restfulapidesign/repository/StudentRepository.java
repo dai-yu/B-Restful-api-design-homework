@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class StudentRepository {
@@ -34,9 +35,17 @@ public class StudentRepository {
     public void save(Student student) {
         if (students.contains(student)) {
             students.set(students.indexOf(student), student);
-        }else {
+        } else {
             student.setId(students.size() + 1);
             students.add(student);
         }
+    }
+
+    public Optional<Student> findById(int id) {
+        return Optional.ofNullable(id > students.size() ? null : students.get(id - 1));
+    }
+
+    public void deleteStudent(int id) {
+        students.remove(id - 1);
     }
 }
