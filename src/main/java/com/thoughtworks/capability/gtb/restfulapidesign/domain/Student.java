@@ -14,7 +14,8 @@ public class Student {
     private String name;
     private Gender gender;
     private String note;
-    enum Gender {
+
+    public enum Gender {
         MALE, FEMALE
     }
 
