@@ -3,13 +3,12 @@ package com.thoughtworks.capability.gtb.restfulapidesign.repository;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
+    private int studentId = 15;
     private final List<Student> students = initStudents();
 
     private List<Student> initStudents() {
@@ -32,20 +31,32 @@ public class StudentRepository {
         ));
     }
 
+    public int getIndex(int id){
+        return students.indexOf(new Student(id,null,null,null));
+    }
+
     public void save(Student student) {
         if (students.contains(student)) {
             students.set(students.indexOf(student), student);
         } else {
-            student.setId(students.size() + 1);
+            student.setId(studentId + 1);
             students.add(student);
         }
     }
 
     public Optional<Student> findById(int id) {
-        return Optional.ofNullable(id > students.size() ? null : students.get(id - 1));
+        return Optional.ofNullable(id > students.size() ? null : students.get(getIndex(id)));
     }
 
     public void deleteStudent(int id) {
-        students.remove(id - 1);
+        students.remove(getIndex(id));
+    }
+
+    public List<Student> findByGender(Student.Gender gender) {
+        return students.stream().filter(student -> student.getGender() == gender).collect(Collectors.toList());
+    }
+
+    public List<Student> findAll() {
+        return students;
     }
 }

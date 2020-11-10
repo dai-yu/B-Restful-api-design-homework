@@ -5,6 +5,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.exception.StudentNotFoun
 import com.thoughtworks.capability.gtb.restfulapidesign.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,13 @@ public class StudentService {
     public void deleteStudent(int id) {
         findById(id);
         studentRepository.deleteStudent(id);
+    }
+
+    public List<Student> findByGender(Student.Gender gender) {
+        return studentRepository.findByGender(gender);
+    }
+
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 }

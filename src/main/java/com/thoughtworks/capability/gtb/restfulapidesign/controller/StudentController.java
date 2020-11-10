@@ -5,14 +5,16 @@ import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
     private final StudentService studentService;
 
-    StudentController(StudentService studentService){
-        this.studentService=studentService;
+    StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @PostMapping
@@ -23,7 +25,17 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStudent(@PathVariable int id){
+    public void deleteStudent(@PathVariable int id) {
         studentService.deleteStudent(id);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Student> getStudents(@RequestParam(required = false) Student.Gender gender) {
+        if (gender != null) {
+            return studentService.findByGender(gender);
+        }else {
+            return studentService.findAll();
+        }
     }
 }
