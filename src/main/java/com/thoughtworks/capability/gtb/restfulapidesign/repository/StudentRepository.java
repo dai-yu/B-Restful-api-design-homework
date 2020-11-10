@@ -53,7 +53,7 @@ public class StudentRepository {
     }
 
     public List<Student> findByGender(Student.Gender gender) {
-        return students.stream().filter(student -> student.getGender() == gender).collect(Collectors.toList());
+        return students.stream().filter(student -> student.getGender() == gender).sorted(Comparator.comparing(Student::getId)).collect(Collectors.toList());
     }
 
     public List<Student> findAll() {
