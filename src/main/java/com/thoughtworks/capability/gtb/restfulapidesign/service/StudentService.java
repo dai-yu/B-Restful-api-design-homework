@@ -6,6 +6,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.repository.StudentReposi
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -36,5 +37,10 @@ public class StudentService {
 
     public List<Student> findAll() {
         return studentRepository.findAll();
+    }
+
+    public void updatePartialInformation(int id, Student student) {
+        findById(id);
+        studentRepository.updatePartialInformation(id, student);
     }
 }

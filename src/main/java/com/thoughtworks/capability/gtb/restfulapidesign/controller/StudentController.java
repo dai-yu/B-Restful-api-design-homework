@@ -34,14 +34,20 @@ public class StudentController {
     public List<Student> getStudents(@RequestParam(required = false) Student.Gender gender) {
         if (gender != null) {
             return studentService.findByGender(gender);
-        }else {
+        } else {
             return studentService.findAll();
         }
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Student getOneStudent(@PathVariable int id){
+    public Student getOneStudent(@PathVariable int id) {
         return studentService.findById(id);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updatePartialInformation(@RequestBody Student student, @PathVariable int id) {
+        studentService.updatePartialInformation(id, student);
     }
 }

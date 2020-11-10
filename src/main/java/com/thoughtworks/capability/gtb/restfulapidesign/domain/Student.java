@@ -19,6 +19,10 @@ public class Student {
         MALE, FEMALE
     }
 
+    public Student(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

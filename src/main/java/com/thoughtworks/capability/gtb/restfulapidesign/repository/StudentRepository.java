@@ -3,6 +3,7 @@ package com.thoughtworks.capability.gtb.restfulapidesign.repository;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,8 +32,8 @@ public class StudentRepository {
         ));
     }
 
-    public int getIndex(int id){
-        return students.indexOf(new Student(id,null,null,null));
+    public int getIndex(int id) {
+        return students.indexOf(new Student(id));
     }
 
     public void save(Student student) {
@@ -53,10 +54,36 @@ public class StudentRepository {
     }
 
     public List<Student> findByGender(Student.Gender gender) {
-        return students.stream().filter(student -> student.getGender() == gender).sorted(Comparator.comparing(Student::getId)).collect(Collectors.toList());
+        return students.stream()
+                .filter(student -> student.getGender() == gender)
+                .sorted(Comparator.comparing(Student::getId))
+                .collect(Collectors.toList());
     }
 
     public List<Student> findAll() {
         return students;
+    }
+
+    public void updatePartialInformation(int id, Student student) {
+        Student newStudent = students.get(getIndex(id));
+        Field[] fields = Student.class.getDeclaredFields();
+        Arrays.stream(fields).filter(field -> {
+            Object o = null;
+            field.setAccessible(true);
+            try {
+                if (!field.getName().equals("id"))
+                    o = field.get(student);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            return Objects.nonNull(o);
+        }).forEach(field -> {
+            try {
+                field.set(newStudent, field.get(student));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+        students.set(getIndex(id), newStudent);
     }
 }
