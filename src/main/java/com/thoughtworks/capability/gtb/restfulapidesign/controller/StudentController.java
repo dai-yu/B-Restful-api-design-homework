@@ -45,9 +45,10 @@ public class StudentController {
         return studentService.findById(id);
     }
 
-    @PatchMapping("/{id}")
+    @RequestMapping(path = "/{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})
     @ResponseStatus(HttpStatus.OK)
-    public void updatePartialInformation(@RequestBody Student student, @PathVariable int id) {
-        studentService.updatePartialInformation(id, student);
+    public void updateField(@RequestBody Student student, @PathVariable int id) {
+        studentService.updateField(id, student);
     }
+
 }

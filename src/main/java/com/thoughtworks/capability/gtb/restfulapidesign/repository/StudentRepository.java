@@ -64,7 +64,7 @@ public class StudentRepository {
         return students;
     }
 
-    public void updatePartialInformation(int id, Student student) {
+    public void updatePartialField(int id, Student student) {
         Student newStudent = students.get(getIndex(id));
         Field[] fields = Student.class.getDeclaredFields();
         Arrays.stream(fields).filter(field -> {
