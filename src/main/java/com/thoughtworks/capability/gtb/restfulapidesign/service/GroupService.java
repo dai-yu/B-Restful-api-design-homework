@@ -22,4 +22,8 @@ public class GroupService {
     public List<Group> regroup() {
         return groupRepository.regroup();
     }
+
+    public void rename(int id, String name) {
+        groupRepository.rename(id,name);
+    }
 }

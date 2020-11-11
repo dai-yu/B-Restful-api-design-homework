@@ -42,4 +42,8 @@ public class GroupRepository {
         }
         return groups;
     }
+
+    public void rename(int id, String name) {
+        groups.get(id-1).setName(name);
+    }
 }
