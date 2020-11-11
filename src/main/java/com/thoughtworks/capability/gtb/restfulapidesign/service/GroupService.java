@@ -26,4 +26,8 @@ public class GroupService {
     public void rename(int id, String name) {
         groupRepository.rename(id,name);
     }
+
+    public Group getGroup(int id) {
+        return groupRepository.findById(id);
+    }
 }

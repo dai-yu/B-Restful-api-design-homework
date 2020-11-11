@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/groups")
-public class GroupController {
+public class  GroupController {
 
     private final GroupService groupService;
 
@@ -31,5 +31,10 @@ public class GroupController {
     @ResponseStatus(HttpStatus.OK)
     public void rename(@PathVariable int id, @RequestBody Map<String, String> info) {
         groupService.rename(id,info.get("name"));
+    }
+
+    @GetMapping("/{id}")
+    public Group getGroup(@PathVariable int id) {
+        return groupService.getGroup(id);
     }
 }

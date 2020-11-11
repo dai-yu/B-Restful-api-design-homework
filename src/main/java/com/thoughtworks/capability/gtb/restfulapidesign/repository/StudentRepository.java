@@ -33,7 +33,7 @@ public class StudentRepository {
     }
 
     public List<Student> getStudents() {
-        return students;
+        return new ArrayList<>(students);
     }
 
     public int getIndex(int id) {

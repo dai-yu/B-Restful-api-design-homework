@@ -46,4 +46,8 @@ public class GroupRepository {
     public void rename(int id, String name) {
         groups.get(id-1).setName(name);
     }
+
+    public Group findById(int id) {
+        return groups.get(id-1);
+    }
 }
