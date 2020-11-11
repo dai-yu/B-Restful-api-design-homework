@@ -18,7 +18,11 @@ public class GroupRepository {
     private List<Group> groups = initList();
 
     private ArrayList initList() {
-        return new ArrayList<>();
+        ArrayList<Object> list = new ArrayList<>();
+        for (int i=1;i<=6;i++){
+            list.add(new Group(i));
+        }
+        return list;
     }
 
     public List<Group> getGroups() {
@@ -26,11 +30,10 @@ public class GroupRepository {
     }
 
     public List<Group> regroup() {
-        groups.clear();
         List<Student> students = studentRepository.getStudents();
         Collections.shuffle(students);
-        for (int i=1;i<=6;i++){
-            groups.add(new Group(i));
+        for (int i=0;i<6;i++){
+            groups.get(i).getStudents().clear();
         }
         int index = 0;
         while (index < students.size()) {
