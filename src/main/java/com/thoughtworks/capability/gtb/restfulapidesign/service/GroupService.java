@@ -18,4 +18,8 @@ public class GroupService {
     public List<Group> getGroups() {
         return groupRepository.getGroups();
     }
+
+    public List<Group> regroup() {
+        return groupRepository.regroup();
+    }
 }

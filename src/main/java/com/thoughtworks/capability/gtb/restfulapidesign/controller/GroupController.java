@@ -20,6 +20,9 @@ public class GroupController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Group> getGroups(@RequestParam(defaultValue = "false") boolean regroup){
+        if (regroup){
+            return groupService.regroup();
+        }
         return groupService.getGroups();
     }
 }
