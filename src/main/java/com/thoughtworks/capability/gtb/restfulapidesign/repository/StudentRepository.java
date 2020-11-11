@@ -32,6 +32,10 @@ public class StudentRepository {
         ));
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
     public int getIndex(int id) {
         return students.indexOf(new Student(id));
     }
