@@ -3,13 +3,17 @@ package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 import com.thoughtworks.capability.gtb.restfulapidesign.domain.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.GroupService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/groups")
+@Validated
 public class  GroupController {
 
     private final GroupService groupService;
@@ -34,7 +38,7 @@ public class  GroupController {
     }
 
     @GetMapping("/{id}")
-    public Group getGroup(@PathVariable int id) {
+    public Group getGroup(@PathVariable @Min(0) @Max(6) int id) {
         return groupService.getGroup(id);
     }
 }
