@@ -33,11 +33,12 @@ public class  GroupController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void rename(@PathVariable int id, @RequestBody Map<String, String> info) {
-        groupService.rename(id,info.get("name"));
+    public void updateInformation(@PathVariable int id, @RequestBody Map<String, String> info) {
+        groupService.updateInformation(id,info);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Group getGroup(@PathVariable @Min(0) @Max(6) int id) {
         return groupService.getGroup(id);
     }

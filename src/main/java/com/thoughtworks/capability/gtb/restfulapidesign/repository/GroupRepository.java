@@ -5,9 +5,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class GroupRepository {
@@ -43,11 +41,18 @@ public class GroupRepository {
         return groups;
     }
 
-    public void rename(int id, String name) {
-        groups.get(id-1).setName(name);
-    }
-
     public Group findById(int id) {
         return groups.get(id-1);
+    }
+
+    public void update(int id, Map<String, String> info) {
+        Optional<String> name = Optional.ofNullable(info.get("name"));
+        Optional<String> note = Optional.ofNullable(info.get("note"));
+        if (name.isPresent()){
+            groups.get(id-1).setName(name.get());
+        }
+        if (note.isPresent()){
+            groups.get(id-1).setNote(note.get());
+        }
     }
 }

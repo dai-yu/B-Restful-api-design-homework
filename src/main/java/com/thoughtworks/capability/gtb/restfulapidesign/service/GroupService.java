@@ -5,6 +5,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.repository.GroupReposito
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GroupService {
@@ -23,11 +24,11 @@ public class GroupService {
         return groupRepository.regroup();
     }
 
-    public void rename(int id, String name) {
-        groupRepository.rename(id,name);
-    }
-
     public Group getGroup(int id) {
         return groupRepository.findById(id);
+    }
+
+    public void updateInformation(int id, Map<String, String> info) {
+        groupRepository.update(id, info);
     }
 }
